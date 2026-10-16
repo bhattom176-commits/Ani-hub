@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100d1d">
+<title>ANI HUB — Anime Library</title>
+<style>
+:root{--bg:#0d0b16;--panel:#171326;--panel2:#211a35;--text:#f8f5ff;--muted:#b7aecb;--accent:#a78bfa;--accent2:#f472b6;--line:#332949}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#21163a 0,#0d0b16 55%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}a{color:inherit}.wrap{max-width:1180px;margin:auto;padding:0 18px}
+header{position:sticky;top:0;z-index:10;background:#0d0b16eF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:68px;display:flex;align-items:center;gap:18px;justify-content:space-between}.brand{font-size:1.4rem;font-weight:900;letter-spacing:1px;text-decoration:none}.brand span{color:var(--accent2)}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks button,.ghost{background:transparent;color:var(--muted);padding:9px 12px;border-radius:10px}.navlinks button:hover,.navlinks button.active{background:var(--panel2);color:white}
+.hero{padding:44px 0 30px;display:grid;grid-template-columns:1.4fr .8fr;gap:24px;align-items:center}.eyebrow{color:var(--accent2);font-weight:800;letter-spacing:2px;font-size:.78rem}.hero h1{font-size:clamp(2.3rem,6vw,4.4rem);line-height:1.02;margin:10px 0 16px;letter-spacing:-2px}.hero h1 span{color:var(--accent)}.hero p{color:var(--muted);max-width:580px}.heroart{min-height:220px;border:1px solid #59427b;border-radius:24px;background:linear-gradient(135deg,#39235e,#171326 55%,#532442);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}.heroart:before,.heroart:after{content:"";position:absolute;border-radius:50%;filter:blur(1px)}.heroart:before{width:190px;height:190px;background:#a78bfa55;right:8%;top:-20px}.heroart:after{width:130px;height:130px;background:#f472b655;left:8%;bottom:-20px}.heroart strong{z-index:1;font-size:clamp(2rem,5vw,3.5rem);text-shadow:0 8px 30px #000;letter-spacing:4px}
+.searchrow{display:flex;gap:10px;margin:10px 0 22px}.searchrow input{flex:1;min-width:0}.field,input,select,textarea{background:#100d1d;border:1px solid var(--line);color:var(--text);padding:12px 13px;border-radius:12px;width:100%;outline:none}.field:focus,input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+.primary{background:linear-gradient(120deg,var(--accent),var(--accent2));color:#171020;font-weight:850;padding:11px 15px;border-radius:12px}.secondary{background:var(--panel2);color:white;padding:10px 13px;border-radius:11px;border:1px solid var(--line)}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 14px}.sectionhead h2{margin:0;font-size:1.35rem}.muted{color:var(--muted)}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.chip{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:8px 12px;border-radius:999px}.chip.active{background:#a78bfa22;border-color:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:15px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0;transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-3px);border-color:#8b6ac0}.poster{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;background:linear-gradient(145deg,var(--c1,#4f3b79),var(--c2,#171326));font-size:1.25rem;font-weight:900;letter-spacing:1px;position:relative}.poster small{position:absolute;left:10px;bottom:10px;font-size:.68rem;background:#090711b8;padding:4px 7px;border-radius:7px;letter-spacing:0}.cardbody{padding:12px}.card h3{font-size:.98rem;margin:0 0 5px;overflow-wrap:anywhere}.meta{color:var(--muted);font-size:.82rem}.cardactions{display:flex;gap:7px;margin-top:11px}.cardactions button{flex:1;padding:8px 6px;font-size:.82rem}.empty{padding:28px;border:1px dashed var(--line);border-radius:16px;color:var(--muted);text-align:center}
+footer{margin-top:45px;padding:25px 0 35px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+dialog{border:1px solid #493765;border-radius:20px;background:#130f21;color:var(--text);padding:0;width:min(760px,calc(100% - 24px));max-height:90vh;overflow:auto}dialog::backdrop{background:#05030bc9;backdrop-filter:blur(5px)}.modalhead{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#130f21;z-index:1}.modalhead h2{font-size:1.1rem;margin:0}.modalcontent{padding:18px}.player{background:#050408;border:1px solid var(--line);border-radius:14px;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;overflow:hidden}.player video{width:100%;height:100%;max-height:55vh;background:#000}.episode-list{display:grid;gap:8px;margin-top:14px}.episode{display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;background:var(--panel);color:white;padding:12px;border:1px solid var(--line);border-radius:12px}.episode span{color:var(--muted);font-size:.84rem}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.full{grid-column:1/-1}.label{display:block;font-size:.84rem;color:var(--muted);margin:0 0 6px}.notice{padding:12px 14px;background:#241c37;border:1px solid #4d3a6a;border-radius:12px;color:#d8cdec;font-size:.88rem;margin-bottom:15px}.hidden{display:none!important}
+@media(max-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{grid-template-columns:1fr .7fr}.heroart{min-height:180px}}
+@media(max-width:650px){.wrap{padding:0 13px}.nav{align-items:flex-start;padding:13px 0;flex-direction:column;gap:8px}.navlinks{width:100%}.navlinks button{padding:8px 10px}.hero{grid-template-columns:1fr;padding-top:30px}.heroart{min-height:130px}.searchrow{flex-direction:column}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.cardbody{padding:10px}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.sectionhead{align-items:flex-start}.sectionhead h2{font-size:1.2rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="brand" href="#" aria-label="ANI HUB home">ANI <span>HUB</span></a>
+<nav class="navlinks" aria-label="Main navigation">
+<button class="active" data-view="home">Home</button><button data-view="watchlist">My List</button><button data-view="add">＋ Add Anime</button>
+</nav></div></header>
+<main class="wrap">
+<section class="hero" id="hero">
+<div><div class="eyebrow">YOUR ANIME CORNER</div><h1>Find your next <span>world.</span></h1><p>Explore anime, save your favourites, and open episodes from sources you own or are authorized to share.</p>
+<div class="searchrow"><input id="search" type="search" placeholder="Search anime or genre…" aria-label="Search anime"><button class="primary" id="searchBtn">Search</button></div></div>
+<div class="heroart" aria-label="ANI HUB artwork"><strong>ANI HUB</strong></div>
+</section>
+<section id="catalogView">
+<div class="sectionhead"><h2 id="catalogTitle">Explore Anime</h2><span class="muted" id="count"></span></div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+<div class="empty hidden" id="empty">No anime found. Try another search or add your own title.</div>
+</section>
+<section id="addView" class="hidden">
+<div class="sectionhead"><h2>Add anime / episodes</h2></div>
+<div class="notice">Use videos you created or have permission to distribute. This page saves your catalogue in this browser; it does not upload video files to the internet. For public episodes, use an authorized video host or link to an official service.</div>
+<form id="animeForm" class="formgrid">
+<div><label class="label" for="title">Anime title *</label><input id="title" required maxlength="100" placeholder="e.g. My Original Anime"></div>
+<div><label class="label" for="genre">Genre</label><select id="genre"><option>Action</option><option>Adventure</option><option>Comedy</option><option>Drama</option><option>Fantasy</option><option>Romance</option><option>Sci-Fi</option><option>Horror</option><option>Original</option><option>Other</option></select></div>
+<div><label class="label" for="year">Year</label><input id="year" type="number" min="1900" max="2100" placeholder="2026"></div>
+<div><label class="label" for="poster">Poster image URL (optional)</label><input id="poster" type="url" placeholder="https://…"></div>
+<div class="full"><label class="label" for="description">Description</label><textarea id="description" rows="2" maxlength="500" placeholder="Short synopsis…"></textarea></div>
+<div class="full"><label class="label" for="episodeName">Episode 1 name (optional)</label><input id="episodeName" placeholder="Episode 1 — The Beginning"></div>
+<div class="full"><label class="label" for="episodeUrl">Episode video URL or official watch URL (optional)</label><input id="episodeUrl" type="url" placeholder="https://…"></div>
+<div class="full"><button class="primary" type="submit">Save to this browser</button> <button class="secondary" type="button" id="cancelAdd">Cancel</button></div>
+</form>
+<p class="muted">Tip: a direct MP4 URL may play in the built-in player if the host permits it. Many streaming-site links cannot be played inside another website; use the official link button instead.</p>
+</section>
+</main>
+<footer><div class="wrap">ANI HUB • Fan-made catalogue template. Anime names, posters, videos and trademarks belong to their respective owners. Share only content you have rights to distribute.</div></footer>
+<dialog id="detailDialog"><div class="modalhead"><h2 id="detailTitle">Anime details</h2><button class="ghost" id="closeDetail" aria-label="Close">✕</button></div><div class="modalcontent" id="detailBody"></div></dialog>
+<script>
+const initial = [
+{id:'demo1',title:'Crimson Horizon',genre:'Action',year:'2026',description:'A young wanderer discovers a power that may change their world. Demo entry—replace with your own licensed content.',episodes:[{name:'Episode 1 — The Beginning',url:''}],colors:['#793b78','#251637']},
+{id:'demo2',title:'Moonlit Academy',genre:'Fantasy',year:'2026',description:'Mysteries unfold at an academy where the moon never sets. Demo entry.',episodes:[],colors:['#3e5d91','#1a1531']},
+{id:'demo3',title:'Pixel Spirits',genre:'Adventure',year:'2025',description:'A small team sets off into a strange digital realm. Demo entry.',episodes:[],colors:['#267d80','#16243c']},
+{id:'demo4',title:'After the Rain',genre:'Drama',year:'2025',description:'Two friends find hope after a difficult season. Demo entry.',episodes:[],colors:['#955c78','#29203b']},
+{id:'demo5',title:'Starforge',genre:'Sci-Fi',year:'2026',description:'An original space adventure concept. Demo entry.',episodes:[],colors:['#7051a3','#172c51']}
+];
+let anime = JSON.parse(localStorage.getItem('anihub_anime_v2') || 'null') || initial;
+let watchlist = JSON.parse(localStorage.getItem('anihub_watchlist_v2') || '[]');
+let activeView='home', activeGenre='All';
+const $=id=>document.getElementById(id);
+const genres=['All','Action','Adventure','Comedy','Drama','Fantasy','Romance','Sci-Fi','Horror','Original','Other'];
+function save(){localStorage.setItem('anihub_anime_v2',JSON.stringify(anime));localStorage.setItem('anihub_watchlist_v2',JSON.stringify(watchlist))}
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function go(view){activeView=view;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));$('hero').classList.toggle('hidden',view==='add');$('catalogView').classList.toggle('hidden',view==='add');$('addView').classList.toggle('hidden',view!=='add');if(view==='watchlist')$('catalogTitle').textContent='My List';else if(view==='home')$('catalogTitle').textContent='Explore Anime';if(view!=='add')render()}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
+$('cancelAdd').onclick=()=>go('home');
+function renderFilters(){ $('filters').innerHTML=genres.map(g=>`<button class="chip ${g===activeGenre?'active':''}" data-genre="${g}">${g}</button>`).join('');document.querySelectorAll('[data-genre]').forEach(b=>b.onclick=()=>{activeGenre=b.dataset.genre;renderFilters();render()})}
+function render(){renderFilters();let q=$('search').value.trim().toLowerCase();let list=anime.filter(a=>(activeView!=='watchlist'||watchlist.includes(a.id))&&(activeGenre==='All'||a.genre===activeGenre)&&(!q||(a.title+' '+a.genre+' '+(a.description||'')).toLowerCase().includes(q)));$('count').textContent=`${list.length} title${list.length===1?'':'s'}`;$('grid').innerHTML=list.map((a,i)=>{let colors=a.colors||['#4f3b79','#171326'];let poster=a.poster?`<img src="${escapeHtml(a.poster)}" alt="" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.remove()">`:'';return `<article class="card"><div class="poster" style="--c1:${escapeHtml(colors[0])};--c2:${escapeHtml(colors[1])}">${poster}<span>${escapeHtml(a.title)}</span><small>${escapeHtml(a.genre||'Anime')}</small></div><div class="cardbody"><h3>${escapeHtml(a.title)}</h3><div class="meta">${escapeHtml(a.year||'Year unknown')} · ${escapeHtml(a.genre||'Anime')}</div><div class="cardactions"><button class="secondary" onclick="openDetail('${a.id}')">Episodes</button><button class="secondary" onclick="toggleList('${a.id}')">${watchlist.includes(a.id)?'♥ Saved':'＋ List'}</button></div></div></article>`}).join('');$('empty').classList.toggle('hidden',list.length>0)}
+$('search').addEventListener('input',render);$('searchBtn').onclick=render;
+window.toggleList=id=>{watchlist=watchlist.includes(id)?watchlist.filter(x=>x!==id):[...watchlist,id];save();render()};
+window.openDetail=id=>{let a=anime.find(x=>x.id===id);if(!a)return;$('detailTitle').textContent=a.title;$('detailBody').innerHTML=`<p class="muted">${escapeHtml(a.genre||'Anime')} · ${escapeHtml(a.year||'Year unknown')}</p><p>${escapeHtml(a.description||'No description added yet.')}</p><div class="player" id="playerArea"><span class="muted">Choose an episode below to play an authorized video, or open its official watch page.</span></div><div class="sectionhead"><h3>Episodes</h3><span class="muted">${(a.episodes||[]).length} available</span></div><div class="episode-list">${(a.episodes||[]).length?(a.episodes||[]).map((e,i)=>`<div class="episode"><div><strong>${escapeHtml(e.name||'Episode '+(i+1))}</strong><br><span>Episode ${i+1}</span></div><button class="primary" onclick="playEpisode('${a.id}',${i})">Open</button></div>`).join(''):'<div class="empty">No episodes added yet.</div>'}</div><p style="margin-top:15px"><button class="secondary" onclick="toggleList('${a.id}');openDetail('${a.id}')">${watchlist.includes(a.id)?'♥ Remove from My List':'＋ Add to My List'}</button></p>`;$('detailDialog').showModal()};
+window.playEpisode=(id,i)=>{let a=anime.find(x=>x.id===id),e=a?.episodes?.[i];if(!e||!e.url){$('playerArea').innerHTML='<span class="muted">No episode URL added. Edit the title and add an authorized video URL.</span>';return}let safe=e.url;try{let u=new URL(safe);if(!['https:','http:'].includes(u.protocol))throw 0;if(/\.mp4($|\?)/i.test(u.pathname+u.search)){ $('playerArea').innerHTML=`<video controls playsinline preload="metadata" src="${escapeHtml(safe)}">Your browser cannot play this video.</video>`}else{$('playerArea').innerHTML=`<div><p>This link may not support embedded playback.</p><a class="primary" style="display:inline-block;text-decoration:none" href="${escapeHtml(safe)}" target="_blank" rel="noopener noreferrer">Open watch page ↗</a></div>`}}catch(err){$('playerArea').innerHTML='<span class="muted">That URL is invalid. Please check it.</span>'}};
+$('closeDetail').onclick=()=>$('detailDialog').close();
+$('animeForm').addEventListener('submit',e=>{e.preventDefault();let title=$('title').value.trim();let url=$('episodeUrl').value.trim();let episodeName=$('episodeName').value.trim();let item={id:'custom_'+Date.now(),title,genre:$('genre').value,year:$('year').value,poster:$('poster').value.trim(),description:$('description').value.trim(),episodes:[],colors:['#704f9b','#1a1531']};if(url)item.episodes.push({name:episodeName||'Episode 1',url});anime.unshift(item);save();e.target.reset();activeGenre='All';go('home');alert('Saved in this browser. To show it to other visitors, publish the site and connect a shared catalogue/backend.');});
+render();
+</script>
+</body></html>
